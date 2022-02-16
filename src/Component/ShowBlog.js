@@ -1,19 +1,32 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { ContextAPI } from './ContextAPI'
+// import { ContextAPI } from './ContextAPI'
 import hand from '../hand.jpg'
 import share from '../share.jpg'
 import face from '../face.png'
 import "./ShowBlog.css"
+import axios from 'axios'
 
 
 const ShowBlog = () => {
+
+    const [rows, setRows] = useState([]);
+    useEffect(() => {
+        axios
+        .get("https://reactblogbacken.herokuapp.com/api/v1/home/details")
+        .then((req,res) => {
+            const data = req.data;
+            console.log(data);
+            setRows(data);
+        });
+    }, []);
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
 
-    const [rows] = useContext(ContextAPI)
+    // const [rows] = useContext(ContextAPI)
     const {id} = useParams();
     let val1 = id-1;
     let val1string = String(val1);

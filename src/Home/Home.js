@@ -1,9 +1,23 @@
-import React, {useState,useContext} from 'react'
+import React, {useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
-import { ContextAPI } from '../Component/ContextAPI'
+// import { ContextAPI } from '../Component/ContextAPI'
 import './Home.css'
+import axios from 'axios'
 
 const Home = () => {
+
+    const [rows, setRows] = useState([]);
+    useEffect(() => {
+        axios
+        .get("https://reactblogbacken.herokuapp.com/api/v1/home/details")
+        .then((req,res) => {
+            const data = req.data;
+            console.log(data);
+            setRows(data);
+        });
+    }, []);
+
+
     const [loadMore, setLoadMore] = useState(false);
     const [loadBtntext, setLoadBtntext] = useState("Load More");
 
@@ -21,7 +35,7 @@ const Home = () => {
     
 
 
-    const [rows] = useContext(ContextAPI);
+    // const [rows] = useContext(ContextAPI);
     
     return (
         <div className='container'>

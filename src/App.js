@@ -9,13 +9,11 @@ import Fitness from './Fitness/Fitness'
 import Food from './Food/Food'
 import PageNotFound from './Component/PageNotFound'
 import ShowBlog from './Component/ShowBlog';
-import { BlogData } from './Component/ContextAPI';
 
 
 
 function App() {
   return (
-    <BlogData>
       <div className="App">
         <Router>
           <Header/>
@@ -32,7 +30,6 @@ function App() {
           </Routes>
         </Router>
       </div>
-    </BlogData>
   );
 }
 
